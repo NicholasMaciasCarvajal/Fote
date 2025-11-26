@@ -19,3 +19,19 @@ void AAWAPlayerController::SetupInputComponent()
 		}
 	}
 }
+
+void AAWAPlayerController::BeginPlay()
+{
+    Super::BeginPlay();
+
+    if (!GetPawn())
+    {
+        FVector SpawnLocation = FVector(0, 0, 300);
+        FRotator SpawnRotation = FRotator::ZeroRotator;
+        FActorSpawnParameters Params;
+        Params.Owner = this;
+
+        AAWACharacter* NewPawn = GetWorld()->SpawnActor<AAWACharacter>(AAWACharacter::StaticClass(), SpawnLocation, SpawnRotation, Params);
+        Possess(NewPawn);
+    }
+}

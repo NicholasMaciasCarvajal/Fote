@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "ZonaInterface.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
@@ -19,7 +20,8 @@ DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
  *  Implements a controllable orbiting camera
  */
 UCLASS(abstract)
-class AAWACharacter : public ACharacter
+class AAWACharacter : public ACharacter, public IZonaInterface
+
 {
 	GENERATED_BODY()
 
@@ -49,15 +51,21 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Input")
 	UInputAction* MouseLookAction;
 
+	// Input mapping
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
+	class UInputMappingContext* DefaultMappingContext;
+
+
+
 public:
 
 	/** Constructor */
-	AAWACharacter();	
+	AAWACharacter();
 
 protected:
 
-	/** Initialize input action bindings */
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void BeginPlay() override;
 
 protected:
 
@@ -85,6 +93,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Input")
 	virtual void DoJumpEnd();
 
+	void AAWACharacter::OnEnterZone_Implementation(bool bIsInZone, FName ZoneTag)
+
+
 public:
 
 	/** Returns CameraBoom subobject **/
@@ -92,5 +103,6 @@ public:
 
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
 };
 

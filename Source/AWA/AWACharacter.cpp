@@ -51,6 +51,33 @@ AAWACharacter::AAWACharacter()
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 }
 
+void AAWACharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	UE_LOG(LogTemp, Warning, TEXT(">>> BeginPlay del AAWACharacter EJECUTADO"));
+
+	APlayerController* PC = Cast<APlayerController>(GetController());
+	if (PC)
+	{
+		if (ULocalPlayer* LocalPlayer = PC->GetLocalPlayer())
+		{
+			if (UEnhancedInputLocalPlayerSubsystem* Subsystem =
+				LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>())
+			{
+				if (DefaultMappingContext)
+				{
+					Subsystem->AddMappingContext(DefaultMappingContext, 0);
+					UE_LOG(LogTemp, Warning, TEXT("Mapping Context agregado correctamente"));
+				}
+				else
+				{
+					UE_LOG(LogTemp, Error, TEXT("DefaultMappingContext ES NULL"));
+				}
+			}
+		}
+	}
+}
+
 void AAWACharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	// Set up action bindings
@@ -131,4 +158,11 @@ void AAWACharacter::DoJumpEnd()
 {
 	// signal the character to stop jumping
 	StopJumping();
+}
+
+void AAWACharacter::OnEnterZone_Implementation(bool bIsInZone, FName ZoneTag)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Jugador recibió zona: %s (%d)"), *ZoneTag.ToString(), bIsInZone);
+
+	// Aquí no haces lógica en C++, la haces en Blueprint.
 }

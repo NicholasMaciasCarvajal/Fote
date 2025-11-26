@@ -4,5 +4,6 @@
 
 AAWAGameMode::AAWAGameMode()
 {
-	// stub
+	DefaultPawnClass = AAWACharacter::StaticClass(); // o tu BP
+	PlayerControllerClass = AAWAPlayerController::StaticClass();
 }

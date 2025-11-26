@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "AWAPlayerController.generated.h"
+#include "AWACharacter.h"
 
 class UInputMappingContext;
 
@@ -18,6 +19,7 @@ class AAWAPlayerController : public APlayerController
 	GENERATED_BODY()
 	
 protected:
+	virtual void BeginPlay() override;
 
 	/** Input Mapping Contexts */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category ="Input", meta = (AllowPrivateAccess = "true"))
