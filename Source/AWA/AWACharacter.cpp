@@ -159,10 +159,3 @@ void AAWACharacter::DoJumpEnd()
 	// signal the character to stop jumping
 	StopJumping();
 }
-
-void AAWACharacter::OnEnterZone_Implementation(bool bIsInZone, FName ZoneTag)
-{
-	UE_LOG(LogTemp, Warning, TEXT("Jugador recibió zona: %s (%d)"), *ZoneTag.ToString(), bIsInZone);
-
-	// Aquí no haces lógica en C++, la haces en Blueprint.
-}

@@ -8,7 +8,6 @@
 
 void AAWAPlayerController::SetupInputComponent()
 {
-	Super::SetupInputComponent();
 
 	// Add Input Mapping Contexts
 	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))

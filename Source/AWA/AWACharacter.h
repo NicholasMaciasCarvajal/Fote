@@ -2,7 +2,6 @@
 
 #pragma once
 
-#include "ZonaInterface.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
@@ -20,7 +19,7 @@ DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
  *  Implements a controllable orbiting camera
  */
 UCLASS(abstract)
-class AAWACharacter : public ACharacter, public IZonaInterface
+class AAWACharacter : public ACharacter
 
 {
 	GENERATED_BODY()
@@ -92,9 +91,6 @@ public:
 	/** Handles jump pressed inputs from either controls or UI interfaces */
 	UFUNCTION(BlueprintCallable, Category="Input")
 	virtual void DoJumpEnd();
-
-	void AAWACharacter::OnEnterZone_Implementation(bool bIsInZone, FName ZoneTag)
-
 
 public:
 
